@@ -2,26 +2,37 @@ defmodule ConnectFour do
 
   def won?([moves: moves, config: [connect_what: connect_what, current_player: current_player]]) do
     moves
-    |> sorted_moves_for_current_player(current_player)
-    |> most_contiguous_moves == connect_what
+    |> moves_for_player(current_player)
+    |> Enum.sort(&(&1 < &2))
+    |> winning_row_or_column?(connect_what)
   end
 
-  defp most_contiguous_moves(moves, counter \\ 0)
-  defp most_contiguous_moves([], counter), do: counter
-  defp most_contiguous_moves([_], counter), do: counter + 1
-  defp most_contiguous_moves([{row_number, _} | rest], counter) do
-    [{next_row_number, _} | _] = rest
-    if (next_row_number - row_number == 1) do
-      most_contiguous_moves(rest, counter + 1)
+  defp winning_row_or_column?(moves, connect_what) do
+    contiguous_moves(moves, :vertical) == connect_what || contiguous_moves(moves, :horizontal) == connect_what
+  end
+
+  defp contiguous_moves(moves, direction, counter \\0)
+  defp contiguous_moves([], _, counter), do: counter
+  defp contiguous_moves([_], _, counter), do: counter + 1
+  defp contiguous_moves([first_move | [next_move | _] = rest], direction, counter) do
+    if neighbours?(first_move, next_move, direction) do
+      contiguous_moves(rest, direction, counter + 1)
     else
-      most_contiguous_moves(rest, 0)
+      contiguous_moves(rest, direction, 0)
     end
   end
 
-  defp sorted_moves_for_current_player(moves, player_id) do
-    moves
-    |> moves_for_player(player_id)
-    |> Enum.sort(&(&1 < &2))
+  defp neighbours?(first_move, next_move, direction) do
+    direction == :vertical && vertical_neighbour?(first_move, next_move) ||
+      direction == :horizontal && horizontal_neighbour?(first_move, next_move)
+  end
+
+  defp vertical_neighbour?({row_index, column_index}, {next_row_index, next_column_index}) do
+    next_column_index - column_index == 1 && next_row_index === row_index
+  end
+
+  defp horizontal_neighbour?({row_index, column_index}, {next_row_index, next_column_index}) do
+    next_row_index - row_index == 1 && next_column_index === column_index
   end
 
   defp moves_for_player(moves, player_id) do
