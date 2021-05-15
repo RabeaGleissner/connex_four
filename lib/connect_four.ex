@@ -1,17 +1,20 @@
 defmodule ConnectFour do
 
-  def won?([moves: moves, config: [size: size, connect_what: connect_what]]) do
-    most_contiguous_moves(moves) >= connect_what
+  def won?([moves: moves, config: [size: _, connect_what: connect_what]]) do
+    moves
+    |> Enum.map(fn {_, coordinates} -> coordinates end)
+    |> most_contiguous_moves == connect_what
   end
 
-  defp most_contiguous_moves([]), do: 0
-  defp most_contiguous_moves([_]), do: 1
-  defp most_contiguous_moves(moves) do
-    [{_, {first_move_x, _}}, {_, {second_move_x, _}}] = moves
-    if first_move_x + 1 == second_move_x do
-      2
+  defp most_contiguous_moves(moves, counter \\ 0)
+  defp most_contiguous_moves([], _), do: 0
+  defp most_contiguous_moves([_], counter), do: counter + 1
+  defp most_contiguous_moves([{row_number, _} | rest], counter) do
+    [{next_row_number, _} | _] = rest
+    if (next_row_number - row_number == 1) do
+      most_contiguous_moves(rest, counter + 1)
     else
-      1
+      most_contiguous_moves(rest, 0)
     end
   end
 end
