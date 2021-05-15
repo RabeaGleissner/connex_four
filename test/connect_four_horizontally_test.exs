@@ -4,17 +4,17 @@ defmodule ConnectFourTest do
 
   describe "connect target > 4" do
     test "game not won if there are no moves" do
-      game = [moves: [], config: [size: {4, 1}, connect_what: 4]]
+      game = [moves: [], config: [connect_what: 4]]
       refute ConnectFour.won?(game)
     end
 
     test "game won if there is a single move for connect one" do
-      game = [moves: [{:one, {0, 0}}], config: [size: {4, 1}, connect_what: 1]]
+      game = [moves: [{:one, {0, 0}}], config: [connect_what: 1]]
       assert ConnectFour.won?(game)
     end
 
     test "game not won for single move for connect two" do
-      game = [moves: [{:one, {0, 0}}], config: [size: {4, 2}, connect_what: 2]]
+      game = [moves: [{:one, {0, 0}}], config: [connect_what: 2]]
       refute ConnectFour.won?(game)
     end
   end
@@ -26,7 +26,7 @@ defmodule ConnectFourTest do
         {:one, {1, 0}},
         {:one, {2, 0}},
         {:one, {3, 0}}
-      ], config: [size: {4, 1}, connect_what: 4]]
+      ], config: [connect_what: 4]]
       assert ConnectFour.won?(game)
     end
 
@@ -36,7 +36,7 @@ defmodule ConnectFourTest do
         {:one, {1, 0}},
         {:one, {2, 0}},
         {:one, {4, 0}}
-      ], config: [size: {4, 1}, connect_what: 4]]
+      ], config: [connect_what: 4]]
       refute ConnectFour.won?(game)
     end
 
@@ -48,7 +48,7 @@ defmodule ConnectFourTest do
         {:one, {3, 0}},
         {:two, {6, 0}},
         {:one, {2, 0}}
-      ], config: [size: {7, 0}, connect_what: 4]]
+      ], config: [connect_what: 4]]
       assert ConnectFour.won?(game)
     end
 
@@ -58,7 +58,7 @@ defmodule ConnectFourTest do
         {:one, {1, 0}},
         {:one, {2, 0}},
         {:two, {3, 0}}
-      ], config: [size: {4, 1}, connect_what: 4]]
+      ], config: [connect_what: 4]]
       refute ConnectFour.won?(game)
     end
   end

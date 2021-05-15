@@ -1,6 +1,6 @@
 defmodule ConnectFour do
 
-  def won?([moves: moves, config: [size: _, connect_what: connect_what]]) do
+  def won?([moves: moves, config: [connect_what: connect_what]]) do
     outcome =  moves |> find_winner(connect_what)
     outcome == :winner
   end
