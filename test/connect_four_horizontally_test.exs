@@ -45,7 +45,7 @@ defmodule ConnectFourTest do
         {:one, {0, 0}},
         {:one, {1, 0}},
         {:one, {2, 0}},
-        {:two, {4, 0}}
+        {:two, {3, 0}}
       ], config: [size: {4, 1}, connect_what: 4]]
       refute ConnectFour.won?(game)
     end
