@@ -31,12 +31,10 @@ defmodule ConnectFour do
   end
 
   defp moves_for_player(moves, player_id) do
-    Enum.reduce(moves, [], fn {player, coordinates}, acc ->
-      if player == player_id do
-        acc ++ [coordinates]
-      else
-        acc
-      end
+    moves
+    |> Enum.reduce([], fn {player, coordinates}, acc ->
+      if player == player_id, do: acc ++ [coordinates], else: acc
     end)
+    |> Enum.sort(&(&1 < &2))
   end
 end

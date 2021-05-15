@@ -40,6 +40,18 @@ defmodule ConnectFourTest do
       refute ConnectFour.won?(game)
     end
 
+    test "game won for four unordered moves" do
+      game = [moves: [
+        {:one, {1, 0}},
+        {:one, {0, 0}},
+        {:two, {5, 0}},
+        {:one, {3, 0}},
+        {:two, {6, 0}},
+        {:one, {2, 0}}
+      ], config: [size: {7, 0}, connect_what: 4]]
+      assert ConnectFour.won?(game)
+    end
+
     test "game not won for four connected moves from different players" do
       game = [moves: [
         {:one, {0, 0}},
