@@ -13,6 +13,16 @@ defmodule ConnectFourDiagonallyTest do
       assert ConnectFour.won?(game)
     end
 
+    test "game won for four connected but unordered moves" do
+      game = [moves: [
+        {:one, {2, 2}},
+        {:one, {0, 0}},
+        {:one, {1, 1}},
+        {:one, {3, 3}}
+      ], config: [connect_what: 4, current_player: :one]]
+      assert ConnectFour.won?(game)
+    end
+
     test "game not won for four diagonally unconnected moves" do
       game = [moves: [
         {:one, {0, 0}},

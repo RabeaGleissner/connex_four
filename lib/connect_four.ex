@@ -4,11 +4,7 @@ defmodule ConnectFour do
     moves
     |> moves_for_player(current_player)
     |> Enum.sort(&(&1 < &2))
-    |> winning_row_or_column?(connect_what)
-  end
-
-  defp winning_row_or_column?(moves, connect_what) do
-    contiguous_moves(moves) == connect_what
+    |> contiguous_moves == connect_what
   end
 
   defp contiguous_moves(moves, counter \\0)
@@ -29,11 +25,14 @@ defmodule ConnectFour do
   end
 
   defp vertical_neighbour?({row_index, column_index}, {next_row_index, next_column_index}) do
-    next_column_index - column_index == 1 && next_row_index === row_index
+    adjacent?(next_column_index, column_index) && same_line?(next_row_index, row_index)
   end
 
+  defp adjacent?(next_index, index), do: next_index - index == 1
+  defp same_line?(next_index, index), do: next_index == index
+
   defp horizontal_neighbour?({row_index, column_index}, {next_row_index, next_column_index}) do
-    next_row_index - row_index == 1 && next_column_index === column_index
+    next_row_index - row_index == 1 && next_column_index == column_index
   end
 
   defp diagonal_neighbour?({row_index, column_index}, {next_row_index, next_column_index}) do
