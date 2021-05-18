@@ -21,23 +21,23 @@ defmodule ConnectFour do
   defp neighbours?(first_move, next_move) do
     vertical_neighbour?(first_move, next_move) ||
       horizontal_neighbour?(first_move, next_move) ||
-      diagonal_neighbour?(first_move, next_move)
+        diagonal_neighbour?(first_move, next_move)
   end
 
   defp vertical_neighbour?({row_index, column_index}, {next_row_index, next_column_index}) do
     adjacent?(next_column_index, column_index) && same_line?(next_row_index, row_index)
   end
 
-  defp adjacent?(next_index, index), do: next_index - index == 1
-  defp same_line?(next_index, index), do: next_index == index
-
   defp horizontal_neighbour?({row_index, column_index}, {next_row_index, next_column_index}) do
-    next_row_index - row_index == 1 && next_column_index == column_index
+    adjacent?(next_row_index, row_index) && same_line?(next_column_index, column_index)
   end
 
   defp diagonal_neighbour?({row_index, column_index}, {next_row_index, next_column_index}) do
-    next_row_index - row_index == 1 && next_column_index - column_index == 1
+    adjacent?(next_row_index, row_index) && adjacent?(next_column_index, column_index)
   end
+
+  defp adjacent?(next_index, index), do: next_index - index == 1
+  defp same_line?(next_index, index), do: next_index == index
 
   defp moves_for_player(moves, player_id) do
     Enum.reduce(moves, [], fn {player, coordinates}, acc ->
