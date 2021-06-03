@@ -13,6 +13,18 @@ defmodule ConnectFourVerticallyTest do
       assert ConnectFour.won?(game)
     end
 
+    @tag :pending
+    test "game won for four connected moves with one additional move" do
+      game = [moves: [
+        {:one, {0, 0}},
+        {:one, {0, 1}},
+        {:one, {0, 2}},
+        {:one, {0, 3}},
+        {:one, {1, 1}},
+      ], config: [connect_what: 4, current_player: :one]]
+      assert ConnectFour.won?(game)
+    end
+
     test "game not won for four unconnected moves in the same column" do
       game = [moves: [
         {:one, {0, 0}},
