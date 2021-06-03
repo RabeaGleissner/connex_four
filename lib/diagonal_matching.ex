@@ -1,7 +1,7 @@
 defmodule DiagonalMatching do
-  def contigous_moves(start, coins, direction) do
+  def contiguous_moves(start, coins, direction) do
     if Enum.member?(coins, start) do
-      1 + contigous_moves(next(start, direction), coins, direction)
+      1 + contiguous_moves(next(start, direction), coins, direction)
     else
       0
     end
