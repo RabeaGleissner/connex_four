@@ -3,7 +3,7 @@ defmodule DiagonalMatchingTest do
   doctest DiagonalMatching
 
   describe "contiguous diagonal moves" do
-    test "is zero if there are no coin on the start position" do
+    test "is zero if there is no coin on the start position" do
       start = {2, 2}
       coins = []
       assert DiagonalMatching.contiguous_moves(start, coins, :positive) == 0
@@ -24,7 +24,7 @@ defmodule DiagonalMatchingTest do
       assert DiagonalMatching.contiguous_moves(start, coins, :negative) == 1
     end
 
-    test "is two if there are three contiguous moves in a positive direction" do
+    test "is three if there are three contiguous moves in a positive direction" do
       start = {2, 2}
       coins = [start, {3, 3}, {4,4}]
       assert DiagonalMatching.contiguous_moves(start, coins, :positive) == 3
