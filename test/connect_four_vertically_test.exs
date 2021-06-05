@@ -16,7 +16,6 @@ defmodule ConnectFourVerticallyTest do
       assert ConnectFour.won?(game)
     end
 
-    @tag :pending
     test "game won for four connected moves with one additional move" do
       game = GameStateBuilder.build(
         [
@@ -24,9 +23,9 @@ defmodule ConnectFourVerticallyTest do
           {:one, {0, 1}},
           {:one, {0, 2}},
           {:one, {0, 3}},
-          {:one, {1, 1}},
+          {:one, {1, 1}}
         ],
-        {1, 1}
+        {0, 3}
       )
       assert ConnectFour.won?(game)
     end
