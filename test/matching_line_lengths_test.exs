@@ -2,34 +2,34 @@ defmodule MatchingLineLengthsTest do
   use ExUnit.Case
   doctest MatchingLineLengths
 
-  describe "finds length of contiguous matching coins per orientation" do
+  describe "finds longest line with matching contiguous coins" do
     test "finds zero match length when there are no coins" do
-      result = MatchingLineLengths.lengths([], {})
+      result = MatchingLineLengths.longest_chain_length([], {})
 
-      assert result == [horizontal: 0, vertical: 0, diagonal: 0]
+      assert result == 0
     end
 
-    test "finds match lengths for horizontal line" do
+    test "finds match length for horizontal line" do
       current_player_coins = [
         {0, 0}, {1, 0}, {2, 0}, {3, 0}
       ]
-      result = MatchingLineLengths.lengths(current_player_coins, {0, 0})
+      result = MatchingLineLengths.longest_chain_length(current_player_coins, {0, 0})
 
-      assert result == [horizontal: 4, vertical: 1, diagonal: 1]
+      assert result == 4
     end
 
-    test "finds match lengths for vertical line" do
+    test "finds match length for vertical line" do
       current_player_coins = [
         {0, 2},
         {0, 1},
         {0, 0},
       ]
-      result = MatchingLineLengths.lengths(current_player_coins, {0, 0})
+      result = MatchingLineLengths.longest_chain_length(current_player_coins, {0, 0})
 
-      assert result == [horizontal: 1, vertical: 3, diagonal: 1]
+      assert result == 3
     end
 
-    test "finds match lengths for diagonal line" do
+    test "finds match length for diagonal line" do
       current_player_coins = [
                                   {4, 4},
                             {3, 3},
@@ -37,9 +37,9 @@ defmodule MatchingLineLengthsTest do
               {1, 1},
         {0, 0},
       ]
-      result = MatchingLineLengths.lengths(current_player_coins, {0, 0})
+      result = MatchingLineLengths.longest_chain_length(current_player_coins, {0, 0})
 
-      assert result == [horizontal: 1, vertical: 1, diagonal: 5]
+      assert result == 5
     end
   end
 end

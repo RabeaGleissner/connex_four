@@ -6,16 +6,16 @@ defmodule ConnectFour do
     config: [connect_what: connect_what]
   ]) do
     moves
-    |> moves_for_player(player_id)
-    |> MatchingLineLengths.lengths(current_move)
+    |> moves_for_current_player(player_id)
+    |> MatchingLineLengths.longest_chain_length(current_move)
     |> winning_line_length?(connect_what)
   end
 
-  defp winning_line_length?(line_lenght_per_direction, connect_what) do
-    Enum.any?(line_lenght_per_direction, fn {_, length} -> length == connect_what end)
+  defp winning_line_length?(longest_chain, connect_what) do
+    longest_chain == connect_what
   end
 
-  defp moves_for_player(moves, player_id) do
+  defp moves_for_current_player(moves, player_id) do
     Enum.reduce(moves, [], fn {player, coordinates}, acc ->
       if player == player_id, do: acc ++ [coordinates], else: acc
     end)
