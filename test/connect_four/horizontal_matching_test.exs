@@ -1,6 +1,7 @@
 defmodule HorizontalMatchingTest do
   use ExUnit.Case
-  doctest HorizontalMatching
+  doctest ConnectFour.HorizontalMatching
+  alias ConnectFour.HorizontalMatching
 
   describe "contiguous horizontal moves" do
     test "is zero if there are no coins" do

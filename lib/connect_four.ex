@@ -1,5 +1,5 @@
 defmodule ConnectFour do
-
+  alias ConnectFour.MatchingLineLengths
   def won?([
     moves: moves,
     current_player: [player_id: player_id, current_move: current_move],

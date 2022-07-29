@@ -1,4 +1,4 @@
-defmodule DiagonalMatching do
+defmodule ConnectFour.DiagonalMatching do
   def contiguous_moves(start, coins, direction) do
     if Enum.member?(coins, start) do
       1 + contiguous_moves(next(start, direction), coins, direction)

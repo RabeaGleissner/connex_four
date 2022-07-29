@@ -1,6 +1,7 @@
-defmodule DiagonalMatchingTest do
+defmodule ConnectFour.DiagonalMatchingTest do
   use ExUnit.Case
-  doctest DiagonalMatching
+  doctest ConnectFour.DiagonalMatching
+  alias ConnectFour.DiagonalMatching
 
   describe "contiguous diagonal moves" do
     test "is zero if there is no coin on the start position" do
