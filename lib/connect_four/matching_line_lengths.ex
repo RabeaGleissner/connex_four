@@ -1,4 +1,8 @@
-defmodule MatchingLineLengths do
+defmodule ConnectFour.MatchingLineLengths do
+  alias ConnectFour.HorizontalMatching
+  alias ConnectFour.VerticalMatching
+  alias ConnectFour.DiagonalMatching
+
   def longest_chain_length([], _), do: 0
   def longest_chain_length(coins, start_position) do
     [HorizontalMatching, VerticalMatching, DiagonalMatching]

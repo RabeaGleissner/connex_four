@@ -1,6 +1,7 @@
 defmodule VerticalMatchingTest do
   use ExUnit.Case
-  doctest VerticalMatching
+  doctest ConnectFour.VerticalMatching
+  alias ConnectFour.VerticalMatching
 
   describe "contiguous vertical moves" do
     test "is zero if there are no coins" do

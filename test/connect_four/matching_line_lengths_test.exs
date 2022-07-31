@@ -1,6 +1,7 @@
 defmodule MatchingLineLengthsTest do
   use ExUnit.Case
-  doctest MatchingLineLengths
+  doctest ConnectFour.MatchingLineLengths
+  alias ConnectFour.MatchingLineLengths
 
   describe "finds longest line with matching contiguous coins" do
     test "finds zero match length when there are no coins" do
