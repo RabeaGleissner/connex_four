@@ -1,5 +1,23 @@
 defmodule ConnectFour do
+  @moduledoc """
+  Logic for the game rules of a Connect Four game.
+  """
+
   alias ConnectFour.MatchingLineLengths
+
+  @doc """
+  Returns true or false, depending on if the most recent move has won the game.
+
+  ## Examples
+  iex> ConnectFour.won?([
+  ...>moves: [one: {0, 0}, two: {1, 1}, one: {2, 2}, one: {3, 3}],
+  ...>current_player: [player_id: :one, current_move: {3, 3}],
+  ...>config: [connect_what: 4]
+  ...>])
+
+  returns false / true
+  """
+
   def won?([
     moves: moves,
     current_player: [player_id: player_id, current_move: current_move],
