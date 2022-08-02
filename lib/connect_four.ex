@@ -33,11 +33,7 @@ defmodule ConnectFour do
     |> winning_line_length?(connect_what)
     |> case do
       true -> {:won, [winner_id: player_id]}
-      false -> if Grid.full?([moves: moves, config: [width: grid_width, height: grid_height]]) do
-          {:draw}
-      else
-          {:in_progress}
-      end
+      false -> handle_non_win_state([moves: moves, config: [width: grid_width, height: grid_height]])
     end
   end
 
@@ -49,5 +45,13 @@ defmodule ConnectFour do
     Enum.reduce(moves, [], fn {player, coordinates}, acc ->
       if player == player_id, do: acc ++ [coordinates], else: acc
     end)
+  end
+
+  defp handle_non_win_state([moves: moves, config: [width: grid_width, height: grid_height]]) do
+    if Grid.full?([moves: moves, config: [width: grid_width, height: grid_height]]) do
+      {:draw}
+    else
+      {:in_progress}
+    end
   end
 end
