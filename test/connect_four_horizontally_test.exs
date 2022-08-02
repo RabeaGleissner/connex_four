@@ -11,9 +11,10 @@ defmodule ConnectFourHorizontallyTest do
           {:one, {2, 0}},
           {:one, {3, 0}}
         ],
-        {3, 0}
+        {3, 0},
+        :one
       )
-      assert ConnectFour.won?(game)
+      assert ConnectFour.game_state(game) == {:won, [winner_id: :one]}
     end
 
     test "game not won for four unconnected moves" do
@@ -24,9 +25,10 @@ defmodule ConnectFourHorizontallyTest do
           {:one, {2, 0}},
           {:one, {4, 0}}
         ],
-        {4, 0}
+        {4, 0},
+        :one
       )
-      refute ConnectFour.won?(game)
+      assert ConnectFour.game_state(game) == {:in_progress}
     end
 
     test "game won for four unordered moves" do
@@ -42,7 +44,7 @@ defmodule ConnectFourHorizontallyTest do
         {2, 0},
         :two
       )
-      assert ConnectFour.won?(game)
+      assert ConnectFour.game_state(game) == {:won, [winner_id: :two]}
     end
 
     test "game not won for four connected moves from different players" do
@@ -55,7 +57,7 @@ defmodule ConnectFourHorizontallyTest do
         ],
         {2, 0}
       )
-      refute ConnectFour.won?(game)
+      assert ConnectFour.game_state(game) == {:in_progress}
     end
 
     test "game not won for four contiguous moves in different rows" do
@@ -66,9 +68,10 @@ defmodule ConnectFourHorizontallyTest do
           {:one, {2, 0}},
           {:one, {3, 2}}
         ],
-        {2, 0}
+        {2, 0},
+        :one
       )
-      refute ConnectFour.won?(game)
+      assert ConnectFour.game_state(game) == {:in_progress}
     end
   end
 end

@@ -7,7 +7,7 @@ defmodule GameStateBuilder do
     [
       moves: moves,
       current_player: [player_id: current_player_id, current_move: current_move],
-      config: [connect_what: connect_what]
+      config: [connect_what: connect_what, grid_height: 3, grid_width: 3]
     ]
   end
 end
