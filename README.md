@@ -1,6 +1,6 @@
 # Connect Four game
 
-![Unit tests](https://github.com/github/docs/actions/workflows/elixir.yml/badge.svg)
+![Unit tests](https://github.com/rabeagleissner/connex_four/actions/workflows/elixir.yml/badge.svg)
 
 
 Hex package with game logic for a Connect Four game.
