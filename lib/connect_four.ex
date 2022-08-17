@@ -5,6 +5,7 @@ defmodule ConnectFour do
 
   alias ConnectFour.MatchingLineLengths
   alias ConnectFour.Grid
+  alias ConnectFour.MoveCounter
 
   @doc """
   Returns true or false, depending on if the most recent move has won the game.
@@ -34,6 +35,20 @@ defmodule ConnectFour do
     |> case do
       true -> {:won, [winner_id: player_id]}
       false -> handle_non_win_state([moves: moves, config: [width: grid_width, height: grid_height]])
+    end
+  end
+
+  def next_player_turn([]), do: {:ok, :one}
+  def next_player_turn(moves) do
+    {player_one_moves, player_two_moves} = MoveCounter.count_moves_for_each_player(moves)
+
+    cond do
+      player_one_moves > player_two_moves ->
+        {:ok, :two}
+      player_one_moves == player_two_moves ->
+        {:ok, :one}
+      player_two_moves > player_one_moves ->
+        {:error}
     end
   end
 
