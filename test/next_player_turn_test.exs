@@ -1,5 +1,6 @@
 defmodule NextPlayerTurnTest do
   use ExUnit.Case
+  doctest ConnectFour
 
   describe "next player turn" do
     test "returns :one when there are no moves yet" do

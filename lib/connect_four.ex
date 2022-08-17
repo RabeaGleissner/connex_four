@@ -12,7 +12,7 @@ defmodule ConnectFour do
 
   ## Examples
   iex> ConnectFour.game_state([
-  ...>moves: [one: {0, 0}, two: {1, 1}, one: {2, 2}, one: {3, 3}],
+  ...>moves: [one: {0, 0}, two: {1, 1}, one: {2, 2}, two: {3, 3}],
   ...>current_player: [player_id: :one, current_move: {3, 3}],
   ...>config: [connect_what: 4, grid_height: 6, grid_width: 8]
   ...>])
@@ -38,6 +38,20 @@ defmodule ConnectFour do
     end
   end
 
+  @doc """
+  Returns tuple of :ok and the player id (:one or :two)
+  Returns :error when :two has more moves than :one because this should never be the case
+
+  ## Examples
+  iex> ConnectFour.next_player_turn(
+  ...>[one: {0, 0}, two: {1, 1}, one: {2, 2}, two: {3, 3}]
+  ...>)
+
+  returns one of these:
+  {:ok, :one}
+  {:ok, :two}
+  {:error}
+  """
   def next_player_turn([]), do: {:ok, :one}
   def next_player_turn(moves) do
     {player_one_moves, player_two_moves} = MoveCounter.count_moves_for_each_player(moves)
