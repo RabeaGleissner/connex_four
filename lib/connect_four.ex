@@ -66,6 +66,30 @@ defmodule ConnectFour do
     end
   end
 
+  @doc """
+  Returns coordinates for the next available slot in the column given
+
+  ## Examples
+  iex> ConnectFour.next_slot_in_column(
+  ...>2,
+  ...>[one: {0, 0}, two: {1, 1}, one: {2, 2}, two: {3, 3}]
+  ...>)
+
+  returns x,y coordinates like this: {1, 3}
+  x is the row, y is the column
+  """
+  def next_slot_in_column(given_column, []), do: {0, given_column}
+  def next_slot_in_column(given_column, moves) do
+    highest_move_in_column = Enum.reduce(moves, 0, fn move, counter ->
+      case move do
+        {_, {row, ^given_column}} ->
+          if row >= counter, do: row, else: counter
+        _ -> counter
+      end
+    end)
+    {highest_move_in_column + 1, given_column}
+  end
+
   defp winning_line_length?(longest_chain, connect_what) do
     longest_chain == connect_what
   end
