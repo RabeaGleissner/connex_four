@@ -80,7 +80,7 @@ defmodule ConnectFour do
   """
   def next_slot_in_column(given_column, []), do: {0, given_column}
   def next_slot_in_column(given_column, moves) do
-    highest_move_in_column = Enum.reduce(moves, 0, fn move, counter ->
+    highest_move_in_column = Enum.reduce(moves, -1, fn move, counter ->
       case move do
         {_, {row, ^given_column}} ->
           if row >= counter, do: row, else: counter
